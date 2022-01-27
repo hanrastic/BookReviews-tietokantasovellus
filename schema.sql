@@ -5,15 +5,15 @@ CREATE TABLE IF NOT EXISTS users (
     isAdmin INTEGER
 );
 
-CREATE TABLE books(
+CREATE TABLE books (
     id SERIAL PRIMARY KEY,
     name TEXT UNIQUE,
     year INTEGER,
     rating NUMERIC REFERENCES ratings,
-    category_id TEXT REFERENCES categories,
+    category_id INTEGER REFERENCES categories,
 );
 
-CREATE TABLE reviews(
+CREATE TABLE reviews (
     id SERIAL PRIMARY KEY,
     user_id INTEGER REFERENCES users,
     book_id INTEGER REFERENCES books,
@@ -23,7 +23,7 @@ CREATE TABLE reviews(
     comment TEXT
 );
 
-CREATE TABLE categories(
+CREATE TABLE categories (
     id SERIAL PRIMARY KEY,
     book_id REFERENCES books,
     name TEXT UNIQUE 
