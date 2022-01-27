@@ -25,6 +25,7 @@ CREATE TABLE reviews(
 
 CREATE TABLE categories(
     id SERIAL PRIMARY KEY,
+    book_id REFERENCES books,
     name TEXT UNIQUE 
 );
 
