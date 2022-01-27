@@ -9,8 +9,8 @@ CREATE TABLE books(
     id SERIAL PRIMARY KEY,
     name TEXT UNIQUE,
     year INTEGER,
-    rating NUMERIC REFERENCES ratings, --????? Tämä ei ihan selkeä
-    category TEXT REFERENCES categories,
+    rating NUMERIC REFERENCES ratings,
+    category_id TEXT REFERENCES categories,
 );
 
 CREATE TABLE reviews(
@@ -35,10 +35,13 @@ CREATE TABLE ratings(
     rating NUMERIC
 );
 
-CREATE TABLE readingList(
-    id SERIAL PRIMARY KEY,
-    user_id INTEGER REFERENCES users,
-    bookName TEXT REFERENCES books
-    readStatus BOOLEAN
-);
+
+
+
+-- CREATE TABLE readingList(
+--     id SERIAL PRIMARY KEY,
+--     user_id INTEGER REFERENCES users,
+--     bookName TEXT REFERENCES books
+--     readStatus BOOLEAN
+-- );
 
