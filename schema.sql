@@ -1,16 +1,33 @@
+DROP TABLE IF EXISTS books, categories, books_categories, ratings, reviews CASCADE;
+
 CREATE TABLE IF NOT EXISTS users (
     id SERIAL PRIMARY KEY,
-    username TEXT,
-    password TEXT,
-    isAdmin INTEGER
+    username TEXT NOT NULL,
+    password TEXT NOT NULL,
+    is_admin INTEGER NOT NULL
 );
 
 CREATE TABLE IF NOT EXISTS books (
     id SERIAL PRIMARY KEY,
-    name TEXT UNIQUE,
-    year INTEGER,
-    rating_id INTEGER REFERENCES ratings,
-    category_id INTEGER REFERENCES categories
+    name TEXT UNIQUE NOT NULL,
+    year INTEGER NOT NULL,
+);
+
+CREATE TABLE IF NOT EXISTS categories (
+    id SERIAL PRIMARY KEY,
+    name TEXT UNIQUE 
+);
+
+CREATE TABLE books_categories (
+	CONSTRAINT book_category_id PRIMARY KEY (book_id, category_id),
+	book_id INTEGER REFERENCES books ON UPDATE CASCADE,
+	category_id INTEGER REFERENCES categories ON UPDATE CASCADE
+);
+
+CREATE TABLE IF NOT EXISTS ratings(
+    id SERIAL PRIMARY KEY,
+    book_id INTEGER REFERENCES books,
+    rating NUMERIC NOT NULL
 );
 
 CREATE TABLE IF NOT EXISTS reviews (
@@ -18,22 +35,14 @@ CREATE TABLE IF NOT EXISTS reviews (
     user_id INTEGER REFERENCES users,
     book_id INTEGER REFERENCES books,
     category_id INTEGER REFERENCES categories,
-    createdAt TIMESTAMP,
+    rating_id INTEGER REFERENCES ratings,
+    created_at TIMESTAMP NOT NULL,
     likes INTEGER,
-    comment TEXT
+    comment TEXT NOT NULL
 );
 
-CREATE TABLE IF NOT EXISTS categories (
-    id SERIAL PRIMARY KEY,
-    --book_id REFERENCES books,
-    name TEXT UNIQUE 
-);
 
-CREATE TABLE IF NOT EXISTS ratings(
-    id SERIAL PRIMARY KEY,
-    --book_id INTEGER REFERENCES books,
-    rating NUMERIC
-);
+
 
 
 
@@ -41,7 +50,7 @@ CREATE TABLE IF NOT EXISTS ratings(
 -- CREATE TABLE readingList(
 --     id SERIAL PRIMARY KEY,
 --     user_id INTEGER REFERENCES users,
---     bookName TEXT REFERENCES books
---     readStatus BOOLEAN
+--     book_name INTEGER REFERENCES books
+--     read_status BOOLEAN
 -- );
 
