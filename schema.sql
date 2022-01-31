@@ -4,7 +4,7 @@ CREATE TABLE IF NOT EXISTS users (
     id SERIAL PRIMARY KEY,
     username TEXT NOT NULL,
     password TEXT NOT NULL,
-    is_admin INTEGER NOT NULL
+    is_admin BOOLEAN NOT NULL
 );
 
 CREATE TABLE IF NOT EXISTS books (
