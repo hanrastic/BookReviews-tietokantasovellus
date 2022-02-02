@@ -4,8 +4,13 @@
 <body>
     <header>
         <h1>Welcome!</h1>
-        <h2>This is the home page...</h2>
-        
+        <h2>This is the home page...</h2>        
     </header>
+    {% if session.user_id %}
+    <a href="/createreview" class="button">Create a review</a>
+    {% else %}
+    To create a review, you must be logged in.
+    {% endif %}
+    
 </body>
 {% endblock %}

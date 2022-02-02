@@ -31,16 +31,18 @@ def login():
     if request.method == 'POST':
         username = request.form['username']
         password = request.form['password']
-        if users.login(username, password):
-            return redirect('/')
-        return redirect('/login')
+        if not users.login(username, password):
+            return render_template("error.html", message="Väärä tunnus tai salasana")
+        return redirect('/')
 
 @app.route('/logout')
 def logout():
     users.logout()
     return redirect('/')
 
-@app.route('/createreview', methods=['POST'])
+@app.route('/createreview', methods=['GET', 'POST'])
 def create_review():
-    books.add_review()
-    pass
+    if request.method == 'GET':
+        return render_template('createreview.html')
+    books.create_a_review()
+    
