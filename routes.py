@@ -44,5 +44,19 @@ def logout():
 def create_review():
     if request.method == 'GET':
         return render_template('createreview.html')
-    books.create_a_review()
+    if request.method == 'POST':
+        book_name = request.form['book_name']
+        categories = request.form.getlist("category")
+        stars = request.form['stars']
+        review_text = request.form['review-text']
+        print(book_name, categories, stars, review_text)
+
+        if not books.get_a_book_id(book_name): #If book is NOT in db
+            books.add_a_book(book_name)
+
+        book_id = books.get_a_book_id(book_name)
+
+        books.create_a_review(book_id, categories, stars, review_text)
+
+        return redirect("/")
     

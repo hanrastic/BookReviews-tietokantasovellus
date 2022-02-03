@@ -10,7 +10,7 @@ CREATE TABLE IF NOT EXISTS users (
 CREATE TABLE IF NOT EXISTS books (
     id SERIAL PRIMARY KEY,
     name TEXT UNIQUE NOT NULL,
-    year INTEGER NOT NULL,
+    year INTEGER --Year field is optional
 );
 
 CREATE TABLE IF NOT EXISTS categories (
@@ -38,7 +38,7 @@ CREATE TABLE IF NOT EXISTS reviews (
     rating_id INTEGER REFERENCES ratings,
     created_at TIMESTAMP NOT NULL,
     likes INTEGER,
-    comment TEXT NOT NULL
+    rev_comment TEXT NOT NULL
 );
 
 

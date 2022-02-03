@@ -1,4 +1,5 @@
 import os
+from unittest import result
 from db import db
 from flask import abort, request, session
 from sqlalchemy import sql
@@ -35,3 +36,13 @@ def signup(username, password):
         return False
 
     return login(username, password)
+
+def get_current_user():
+    try:
+        user_id = session['user_id']
+
+        sql = "SELECT username, is_admin FROM users WHERE id=:user_id"
+        result = db.session.execute(sql, {'user_id': user_id})
+        return result.fetchone()
+    except KeyError:
+        return False
