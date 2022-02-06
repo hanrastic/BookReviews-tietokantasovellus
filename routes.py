@@ -1,5 +1,3 @@
-#Module for handling html and pagrequests
-from crypt import methods
 from app import app
 from flask import render_template, redirect, request, session
 import users

@@ -1,8 +1,3 @@
-from distutils.log import ERROR
-from tkinter import INSERT
-from unittest import result
-from markupsafe import re
-from sqlalchemy import sql
 from db import db
 
 def create_a_review(user_id, book_id, book_comment):
@@ -29,8 +24,8 @@ def get_a_book_id(book_name):
     try:
         sql = "SELECT id FROM books WHERE name=:book_name"
         result = db.session.execute(sql, {'book_name': book_name})
-        return result.fetchone()[0] ##Tää feilaa jos kirjaa ei ole tietokannassa
-    except KeyError: #Keksi tapa miten tää ei crashaa jos hakee book_id:tä kirjalle jota ei ole taulussa
+        return result.fetchone()[0] 
+    except KeyError: 
         return False
 
 def get_category_id(category):
