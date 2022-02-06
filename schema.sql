@@ -18,27 +18,31 @@ CREATE TABLE IF NOT EXISTS categories (
     name TEXT UNIQUE 
 );
 
+-- CREATE TABLE books_categories (
+-- 	CONSTRAINT book_category_id PRIMARY KEY (book_id, category_id),
+-- 	book_id INTEGER REFERENCES books ON UPDATE CASCADE,
+-- 	category_id INTEGER REFERENCES categories ON UPDATE CASCADE
+-- );
+
 CREATE TABLE books_categories (
 	CONSTRAINT book_category_id PRIMARY KEY (book_id, category_id),
-	book_id INTEGER REFERENCES books ON UPDATE CASCADE,
-	category_id INTEGER REFERENCES categories ON UPDATE CASCADE
+	book_id INTEGER REFERENCES books,
+	category_id INTEGER REFERENCES categories
 );
 
 CREATE TABLE IF NOT EXISTS ratings(
     id SERIAL PRIMARY KEY,
     book_id INTEGER REFERENCES books,
-    rating NUMERIC NOT NULL
+    book_rating INTEGER NOT NULL
 );
 
 CREATE TABLE IF NOT EXISTS reviews (
     id SERIAL PRIMARY KEY,
     user_id INTEGER REFERENCES users,
     book_id INTEGER REFERENCES books,
-    category_id INTEGER REFERENCES categories,
-    rating_id INTEGER REFERENCES ratings,
     created_at TIMESTAMP NOT NULL,
     likes INTEGER,
-    rev_comment TEXT NOT NULL
+    rev_comment TEXT
 );
 
 

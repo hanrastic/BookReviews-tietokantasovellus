@@ -1,7 +1,7 @@
 #Module for handling html and pagrequests
 from crypt import methods
 from app import app
-from flask import render_template, redirect, request
+from flask import render_template, redirect, request, session
 import users
 import books
 
@@ -46,17 +46,23 @@ def create_review():
         return render_template('createreview.html')
     if request.method == 'POST':
         book_name = request.form['book_name']
-        categories = request.form.getlist("category")
+        categories = request.form.getlist('category')
         stars = request.form['stars']
         review_text = request.form['review-text']
-        print(book_name, categories, stars, review_text)
 
-        if not books.get_a_book_id(book_name): #If book is NOT in db
-            books.add_a_book(book_name)
+        books.add_a_book(book_name)
+        
 
+        user_id = session["user_id"]
         book_id = books.get_a_book_id(book_name)
 
-        books.create_a_review(book_id, categories, stars, review_text)
+        books.insert_into_ratings(book_id, int(stars))
+        
+        for category in categories:
+            category_id = books.get_category_id(category)
+            books.insert_into_books_categories(book_id, category_id)
+
+        books.create_a_review(user_id, book_id, review_text)
 
         return redirect("/")
     
