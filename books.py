@@ -1,3 +1,4 @@
+from tkinter import INSERT
 from db import db
 
 def create_a_review(user_id, book_id, book_comment):
@@ -41,13 +42,17 @@ def insert_into_books_categories(book_id, category_id):
     db.session.commit()
 
 def insert_into_ratings(book_id, stars):
-    sql = "INSERT INTO ratings (book_id, book_rating) VALUES (:book_id, :rating)  ON CONFLICT DO NOTHING"
+    sql = "INSERT INTO ratings (book_id, book_rating) VALUES (:book_id, :rating) ON CONFLICT DO NOTHING"
     db.session.execute(sql, {'book_id': book_id, 'rating': stars})
     db.session.commit()
 
-
+def insert_categories_and_ratings():
+    sql = "INSERT INTO categories (name) VALUES (Art), (Biography)"
+    db.session.execute(sql,)
 def get_average_rating_for_book():
     try:
         sql = " "
     except KeyError:
         return False
+
+##INSERT INTO categories (name) VALUES ('Art'), ('Biography'), ('Business'), ('Children'), ('Fantasy'), ('Fiction'), ('History'), ('Horror'), ('Non-fiction'), ('Poetry'), ('Psychology'), ('Romance'), ('Sci-fi'), ('Self Help'), ('Sports'), ('Thriller'), ('Travel'), ('War') ON CONFLICT DO NOTHING;
