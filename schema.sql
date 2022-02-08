@@ -1,4 +1,4 @@
-DROP TABLE IF EXISTS books, categories, books_categories, ratings, reviews CASCADE;
+DROP TABLE IF EXISTS users, books, categories, books_categories, ratings, reviews CASCADE;
 
 CREATE TABLE IF NOT EXISTS users (
     id SERIAL PRIMARY KEY,

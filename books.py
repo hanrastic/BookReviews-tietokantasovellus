@@ -1,7 +1,6 @@
 from db import db
 
 def create_a_review(user_id, book_id, book_comment):
-
     sql = ("INSERT INTO reviews "
             "(user_id, book_id, created_at, likes, rev_comment)"
             "VALUES "
