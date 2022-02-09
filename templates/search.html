@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<p>Search page in progress</p>
+<hr>
+<section class='container'>
+    <form action="/result" method='GET'>
+      <h2>Search for a book</h2> 
+      <label for="query">Name of the book</label>
+      <input type="text" name="query" id="query">
+      <input type="submit" value="Search" class="button">
+    </form>
+</section>
+
+{% endblock %}

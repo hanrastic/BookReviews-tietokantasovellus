@@ -1,4 +1,4 @@
-DROP TABLE IF EXISTS books, books_categories, ratings, reviews CASCADE;
+-- DROP TABLE IF EXISTS books, books_categories, ratings, reviews CASCADE;
 
 CREATE TABLE IF NOT EXISTS users (
     id SERIAL PRIMARY KEY,
@@ -18,7 +18,7 @@ CREATE TABLE IF NOT EXISTS categories (
     name TEXT UNIQUE 
 );
 
-CREATE TABLE books_categories (
+CREATE TABLE IF NOT EXISTS books_categories (
 	CONSTRAINT book_category_id PRIMARY KEY (book_id, category_id),
 	book_id INTEGER REFERENCES books,
 	category_id INTEGER REFERENCES categories

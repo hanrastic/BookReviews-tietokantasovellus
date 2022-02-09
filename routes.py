@@ -1,3 +1,4 @@
+from markupsafe import re
 from app import app
 from flask import render_template, redirect, request, session
 import users
@@ -63,4 +64,14 @@ def create_review():
         books.create_a_review(user_id, book_id, review_text)
 
         return redirect("/")
+
+@app.route('/result')
+def result():
+    query = request.args['query']
+    search_results = books.search_for_books_by_name(query)
+    return render_template('result.html', results= search_results)
+
+@app.route('/search')
+def search():
+    return render_template('search.html')
     

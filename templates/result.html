@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<h2>Results</h2>
+<section>
+    {% if not results %}
+    <p>No search results</p>
+    <a href="/search" class="button">Try again</a>
+    {% else %}
+
+    <ul>
+        {% for result in results %}
+
+            <section class="container">
+                <li>
+                    <p><strong>User: </strong>{{ result.username }} <strong>Book: </strong> {{ result.name }} <strong>Rating: </strong> {{ result.book_rating }}</p>
+                    <p><strong>Review: </strong> {{ result.rev_comment }} </p>
+                    <br>
+                </li>
+            </section>
+
+        {% endfor %}
+    {% endif %}
+    </ul>
+</section>
+{% endblock %}

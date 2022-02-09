@@ -1,5 +1,8 @@
 from tkinter import INSERT
+
+from sqlalchemy import sql
 from db import db
+import users
 
 def create_a_review(user_id, book_id, book_comment):
     sql = ("INSERT INTO reviews "
@@ -46,13 +49,20 @@ def insert_into_ratings(book_id, stars):
     db.session.execute(sql, {'book_id': book_id, 'rating': stars})
     db.session.commit()
 
-def insert_categories_and_ratings():
-    sql = "INSERT INTO categories (name) VALUES (Art), (Biography)"
-    db.session.execute(sql,)
-def get_average_rating_for_book():
-    try:
-        sql = " "
-    except KeyError:
-        return False
+def search_for_books_by_name(book_name):
+    sql = ("SELECT "
+                "users.id, users.username, books.id, books.name, ratings.book_rating, created_at, likes, rev_comment "
+           "FROM "
+                "reviews "
+           "INNER JOIN books ON books.id =reviews.book_id "
+           "INNER JOIN users ON users.id = reviews.user_id "
+           "INNER JOIN ratings ON ratings.book_id = books.id "
+           "WHERE LOWER(books.name) LIKE LOWER(:book_name) "
+           "ORDER BY books.name")
+
+    result = db.session.execute(sql, {'book_name': f'%{book_name}%'})
+    return result.fetchall()
+
+
 
 ##INSERT INTO categories (name) VALUES ('Art'), ('Biography'), ('Business'), ('Children'), ('Fantasy'), ('Fiction'), ('History'), ('Horror'), ('Non-fiction'), ('Poetry'), ('Psychology'), ('Romance'), ('Sci-fi'), ('Self Help'), ('Sports'), ('Thriller'), ('Travel'), ('War') ON CONFLICT DO NOTHING;
