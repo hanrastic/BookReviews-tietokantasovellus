@@ -1,4 +1,3 @@
-from markupsafe import re
 from app import app
 from flask import render_template, redirect, request, session
 import users

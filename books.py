@@ -1,8 +1,4 @@
-from tkinter import INSERT
-
-from sqlalchemy import sql
 from db import db
-import users
 
 def create_a_review(user_id, book_id, book_comment):
     sql = ("INSERT INTO reviews "
