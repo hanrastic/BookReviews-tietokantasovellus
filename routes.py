@@ -1,3 +1,4 @@
+from crypt import methods
 from app import app
 from flask import render_template, redirect, request, session
 import users
@@ -64,13 +65,30 @@ def create_review():
 
         return redirect("/")
 
-@app.route('/result')
+@app.route('/result', methods=['GET', 'POST'])
 def result():
-    query = request.args['query']
-    search_results = books.search_for_books_by_name(query)
-    return render_template('result.html', results= search_results)
+    if request.method == 'GET':
+        request.args.get('query_by_name')
+        query_by_name = request.args['query_by_name']
+        print("Chosen to query by name")
+        search_results = books.search_for_books_by_name(query_by_name)
+
+        return render_template('result.html', results = search_results)
+
+    if request.method == 'POST':
+        print("Chosen to query by category")
+        query_by_category = request.form.getlist('category')
+
+        categories = []
+        for category in query_by_category:
+            categories.append(books.get_category_id(category))
+        categories = books.convert(categories)
+
+        search_results = books.search_for_books_by_category(categories)
+
+        return render_template('result.html', results= search_results)
 
 @app.route('/search')
 def search():
     return render_template('search.html')
-    
+

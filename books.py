@@ -1,3 +1,4 @@
+from sqlalchemy import sql
 from db import db
 
 def create_a_review(user_id, book_id, book_comment):
@@ -11,6 +12,11 @@ def create_a_review(user_id, book_id, book_comment):
         "likes": 0,
         "rev_comment":book_comment
     })
+    db.session.commit()
+
+def check_if_user_already_reviewed_book(user_id, book_id):
+    sql = "SELECT "
+    db.session.execute(sql)
     db.session.commit()
 
 def add_a_book(book_name):
@@ -55,10 +61,24 @@ def search_for_books_by_name(book_name):
            "INNER JOIN ratings ON ratings.book_id = books.id "
            "WHERE LOWER(books.name) LIKE LOWER(:book_name) "
            "ORDER BY books.name")
-
     result = db.session.execute(sql, {'book_name': f'%{book_name}%'})
     return result.fetchall()
 
+def search_for_books_by_category(book_categories):
+    sql = ( "SELECT "
+            "users.id, users.username, books.id, books.name, ratings.book_rating, reviews.created_at, reviews.likes, reviews.rev_comment "
+            "FROM users "
+            "INNER JOIN reviews ON users.id = reviews.user_id "
+            "INNER JOIN ratings ON reviews.id = ratings.book_rating "
+            "INNER JOIN books ON ratings.book_id = books.id "
+            "INNER JOIN books_categories ON books.id = books_categories.book_id "
+            "WHERE books_categories.category_id IN :book_category")
+            
+    result = db.session.execute(sql, {'book_category': book_categories})
+    return result.fetchall()
+
+def convert(list):
+    return tuple(list)
 
 
 ##INSERT INTO categories (name) VALUES ('Art'), ('Biography'), ('Business'), ('Children'), ('Fantasy'), ('Fiction'), ('History'), ('Horror'), ('Non-fiction'), ('Poetry'), ('Psychology'), ('Romance'), ('Sci-fi'), ('Self Help'), ('Sports'), ('Thriller'), ('Travel'), ('War') ON CONFLICT DO NOTHING;
