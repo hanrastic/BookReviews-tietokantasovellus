@@ -2,30 +2,37 @@
 
 {% block content %}
 <body>
-    <header>
-        <h1>Welcome!</h1>
-        <h2>This is the home page...</h2>    
-        
-        <section class='container'>
-            <h2>Reviews</h2>
-            <ul>
-                {% for review in reviews %}
-                {% endfor %}
-            </ul>
-        </section> 
-        <hr>   
-    </header>
-    <section>
+    <h1>Welcome!</h1>
+
+    <section class="container">
         <a href="/search" class="button">Search</a>
     </section>
+
     <section>
         {% if session.user_id %}
         <a href="/createreview" class="button">Create a review</a>
         {% else %}
         To create a review, you must be logged in.
         {% endif %}
-    </section>
-    
-    
+    </section class= 'container'>
+    <hr>
+    <section class='container'>
+        <h2>Top-5 reviewed books</h2>
+        <ul>
+            {% if books %}
+            {% for book in books %}
+                <section class="container">
+                    <li class="button">
+                        <p><strong>Book: </strong> <a href="/result/{{ book.name }}/{{ book.avg }}" name="query_by_book_name" class="button">{{ book.name }} </a><strong>Rating: </strong> {{ book.avg }}</p>
+                    </li>
+                </section>
+            {% endfor %}
+            {% else %}
+                <p>No reviews yet</p>
+            {% endif %}
+
+            
+        </ul>
+    </section>    
 </body>
 {% endblock %}
