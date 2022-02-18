@@ -1,6 +1,7 @@
 from sqlalchemy import sql
 from db import db
 
+
 def create_a_review(user_id, book_id, book_comment):
     sql = ("INSERT INTO reviews "
             "(user_id, book_id, created_at, likes, rev_comment)"
@@ -14,10 +15,6 @@ def create_a_review(user_id, book_id, book_comment):
     })
     db.session.commit()
 
-def check_if_user_already_reviewed_book(user_id, book_id):
-    sql = "SELECT "
-    db.session.execute(sql)
-    db.session.commit()
 
 def add_a_book(book_name):
     sql = "INSERT INTO books (name) VALUES (:name) ON CONFLICT DO NOTHING"
@@ -52,7 +49,7 @@ def insert_into_ratings(book_id, stars):
     db.session.commit()
 
 def search_for_books_by_name(book_name):
-    sql = ("SELECT "
+    sql = ("SELECT DISTINCT "
                 "users.id, users.username, books.id, books.name, ratings.book_rating, created_at, likes, rev_comment "
            "FROM "
                 "reviews "
@@ -80,5 +77,10 @@ def search_for_books_by_category(book_categories):
 def convert(list):
     return tuple(list)
 
-
-##INSERT INTO categories (name) VALUES ('Art'), ('Biography'), ('Business'), ('Children'), ('Fantasy'), ('Fiction'), ('History'), ('Horror'), ('Non-fiction'), ('Poetry'), ('Psychology'), ('Romance'), ('Sci-fi'), ('Self Help'), ('Sports'), ('Thriller'), ('Travel'), ('War') ON CONFLICT DO NOTHING;
+def get_top_5_reviewed_books():
+    sql =   ("SELECT "
+            "books.name, ROUND(AVG(ratings.book_rating), 2)AS avg "
+            "FROM books INNER JOIN ratings ON books.id = ratings.book_id "
+            "GROUP BY books.name, ratings.book_rating "
+            "ORDER BY ratings.book_rating DESC LIMIT 5")
+    return db.session.execute(sql).fetchall()

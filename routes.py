@@ -1,4 +1,3 @@
-from crypt import methods
 from app import app
 from flask import render_template, redirect, request, session
 import users
@@ -6,7 +5,9 @@ import books
 
 @app.route("/")
 def index():
-    return render_template("index.html")
+    #get top 5 reviewed books
+    top_5_books = books.get_top_5_reviewed_books()
+    return render_template("index.html", books = top_5_books)
 
 @app.route("/signup", methods=["GET","POST"])
 def signup():
@@ -87,6 +88,16 @@ def result():
         search_results = books.search_for_books_by_category(categories)
 
         return render_template('result.html', results= search_results)
+
+@app.route('/result/<string:name>/<float:avg>')
+def result2(name, avg):
+    print("Book Name: ", name, "AVG: ", avg)
+
+    search_results = books.search_for_books_by_name(name)
+
+    return render_template('result.html', results = search_results)
+
+
 
 @app.route('/search')
 def search():
