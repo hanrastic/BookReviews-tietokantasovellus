@@ -1,0 +1,53 @@
+h1{
+    text-align: center;
+}
+
+.headerinfo {
+    padding-right: 40px;
+  }
+
+section.container {
+    border: 2px #3f3f3f solid;
+    margin: 10px;
+    padding: 10px;
+    border-radius: 5px;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-width: 15%;
+    background-color: rgba(231, 185, 116, 0.2);
+    box-shadow: 0 3px 5px 2px #2222224d;
+    max-height: 800px;
+    overflow: auto;
+}
+
+#headertitle:hover {
+    color: antiquewhite;
+    background-color: rgba(250, 114, 2, 0.6);
+  }
+
+body{
+    background-color: blanchedalmond;
+}
+
+header {
+    position: sticky;
+    top: 0;
+    background-color: antiquewhite;
+    border-bottom: 1px black solid;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.header_button {
+    display: inline;
+    display: block;
+    margin: 25px 0 25px 0;
+}
+
+form {
+    align-items: center;
+  }
