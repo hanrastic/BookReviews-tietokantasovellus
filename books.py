@@ -4,9 +4,10 @@ from db import db
 
 def create_a_review(user_id, book_id, book_comment):
     sql = ("INSERT INTO reviews "
-            "(user_id, book_id, created_at, likes, rev_comment)"
+            "(user_id, book_id, created_at, likes, rev_comment) "
             "VALUES "
-            "(:user_id, :book_id, NOW(), :likes, :rev_comment)")
+            "(:user_id, :book_id, NOW(), :likes, :rev_comment) "
+            "")
     db.session.execute(sql, {
         "user_id": user_id,
         "book_id": book_id,
@@ -49,26 +50,30 @@ def insert_into_ratings(book_id, stars):
     db.session.commit()
 
 def search_for_books_by_name(book_name):
-    sql = ("SELECT DISTINCT "
-                "users.id, users.username, books.id, books.name, ratings.book_rating, created_at, likes, rev_comment "
-           "FROM "
-                "reviews "
-           "INNER JOIN books ON books.id =reviews.book_id "
-           "INNER JOIN users ON users.id = reviews.user_id "
-           "INNER JOIN ratings ON ratings.book_id = books.id "
-           "WHERE LOWER(books.name) LIKE LOWER(:book_name) "
-           "ORDER BY books.name")
+    sql =  ("SELECT DISTINCT "
+                "users.id, users.username, books.id, books.name, ratings.book_rating, reviews.created_at, reviews.likes, reviews.rev_comment "
+            "FROM "
+                "users "
+            "INNER JOIN reviews ON users.id = reviews.user_id "
+            "INNER JOIN books ON reviews.book_id = books.id "
+            "INNER JOIN ratings ON books.id = ratings.book_id "
+            "INNER JOIN books_categories ON ratings.id = books_categories.book_id "
+            "WHERE LOWER(books.name) LIKE LOWER(:book_name) "
+            "ORDER BY books.name")
     result = db.session.execute(sql, {'book_name': f'%{book_name}%'})
     return result.fetchall()
 
 def search_for_books_by_category(book_categories):
-    sql = ( "SELECT "
-            "users.id, users.username, books.id, books.name, ratings.book_rating, reviews.created_at, reviews.likes, reviews.rev_comment "
-            "FROM users "
+    print(book_categories)
+
+    sql = ( "SELECT DISTINCT "
+                "users.id, users.username, books.id, books.name, ratings.book_rating, reviews.created_at, reviews.likes, reviews.rev_comment "
+            "FROM "
+                "users "
             "INNER JOIN reviews ON users.id = reviews.user_id "
-            "INNER JOIN ratings ON reviews.id = ratings.book_rating "
-            "INNER JOIN books ON ratings.book_id = books.id "
-            "INNER JOIN books_categories ON books.id = books_categories.book_id "
+            "INNER JOIN books ON reviews.book_id = books.id "
+            "INNER JOIN ratings ON books.id = ratings.book_id "
+            "INNER JOIN books_categories ON ratings.id = books_categories.book_id "
             "WHERE books_categories.category_id IN :book_category")
             
     result = db.session.execute(sql, {'book_category': book_categories})
@@ -79,8 +84,8 @@ def convert(list):
 
 def get_top_5_reviewed_books():
     sql =   ("SELECT "
-            "books.name, ROUND(AVG(ratings.book_rating), 2)AS avg "
+            "books.name, ROUND(AVG(ratings.book_rating), 2) AS avg "
             "FROM books INNER JOIN ratings ON books.id = ratings.book_id "
-            "GROUP BY books.name, ratings.book_rating "
-            "ORDER BY ratings.book_rating DESC LIMIT 5")
+            "GROUP BY books.name "
+            "ORDER BY 2 DESC LIMIT 5")
     return db.session.execute(sql).fetchall()

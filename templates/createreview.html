@@ -2,10 +2,14 @@
 
 {% block content %}
 
+<body>
+
+<script src="static/script.js"></script>
+    
 <h1>Create a review</h1>
 
 <section>
-    <form action="/createreview" method="POST">
+    <form action="/createreview" method="POST" onsubmit="return checkForEmptyFields(this)">
         <label for="book_name">Book name:</label>
         <input type="text" name="book_name" id="book_name">
         <br>
@@ -13,7 +17,7 @@
         {% include 'categories.html'%}
         <br>
         <label for="stars">Rating:</label>
-            <section class="rating">
+        <section class="rating" id="rating">
             <input type='radio' name='stars' id='one' value=1>
             <label for="one">1</label>
             <input type='radio' name='stars' id='two' value=2>
@@ -33,5 +37,6 @@
         <input type="submit" value="Submit review" class="Button">
     </form>
 </section>
-
+    
+</body>
 {% endblock %}

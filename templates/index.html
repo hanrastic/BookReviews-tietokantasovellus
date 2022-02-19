@@ -23,7 +23,7 @@
             {% for book in books %}
                 <section class="container">
                     <li class="button">
-                        <p><strong>Book: </strong> <a href="/result/{{ book.name }}/{{ book.avg }}" name="query_by_book_name" class="button">{{ book.name }} </a><strong>Rating: </strong> {{ book.avg }}</p>
+                        <p><strong>Book: </strong> <a href="/result/{{ book.name }}/{{ book.avg }}" name="query_by_book_name" class="button">{{ book.name }} </a><strong>stars: </strong> {{ book.avg }}</p>
                     </li>
                 </section>
             {% endfor %}

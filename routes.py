@@ -32,7 +32,7 @@ def login():
         username = request.form['username']
         password = request.form['password']
         if not users.login(username, password):
-            return render_template("error.html", message="Väärä tunnus tai salasana")
+            return render_template("error.html", message="Wrong username or password")
         return redirect('/')
 
 @app.route('/logout')
