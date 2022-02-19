@@ -2,12 +2,12 @@
     <h1><a href="/" id='headertitle'>BookReviews!</a></h1>
     {% if session.user_id %}
     <section class="headerinfo">
-        <p class='button-wrapper'><a href='/logout' class='button'>Kirjaudu ulos</a></p>
+        <p class='header_button'><a href='/logout' class='button'>Kirjaudu ulos</a></p>
     </section>
     {% else %} 
     <section class="headerinfo">
-        <p class='button-wrapper'><a href='/login' class='button'>Log in</a></p>
-        <p class='button-wrapper'><a href='/signup' class='button'>Create account</a></p>
+        <p class='header_button'><a href='/login' class='button'>Log in</a></p>
+        <p class='header_button'><a href='/signup' class='button'>Create account</a></p>
     </section>
     {% endif %}
     <hr>
