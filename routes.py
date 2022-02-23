@@ -45,6 +45,7 @@ def create_review():
     if request.method == 'GET':
         return render_template('createreview.html')
     if request.method == 'POST':
+        users.check_csrf()
         book_name = request.form['book_name']
         categories = request.form.getlist('category')
         stars = request.form['stars']
