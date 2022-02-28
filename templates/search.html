@@ -11,17 +11,16 @@
 <section class='container'>
     <h3>Search By Name: </h3>
     <form action="/result" method='GET'>
-      <label for="query">Name of the book</label>
-      <input type="text" name="query_by_name" id="query_by_name">
-      <input type="submit" value="Search" class="button">
+      <input type="text" name="query_by_name" id="text-input" placeholder="Name of the book">
+      <input type="submit" value="Search" id="login">
     </form>
 </section>
 <br>
 <section class="container">
-    <h3>Search By Category: </h3>
+    <h3>By Category: </h3>
     <form action="/result" method="POST" onsubmit="return checkForEmptyCategories()">
         {% include 'categories.html'%}
-        <input type="submit" value="submit" class="button">
+        <input type="submit" value="Search" id="login">
     </form>
 </section>
   

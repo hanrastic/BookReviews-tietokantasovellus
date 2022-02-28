@@ -5,7 +5,6 @@ import books
 
 @app.route("/")
 def index():
-    #get top 5 reviewed books
     top_5_books = books.get_top_5_reviewed_books()
     return render_template("index.html", books = top_5_books)
 
@@ -52,7 +51,6 @@ def create_review():
         review_text = request.form['review-text']
 
         books.add_a_book(book_name)
-        
 
         user_id = session["user_id"]
         book_id = books.get_a_book_id(book_name)
@@ -97,8 +95,6 @@ def result2(name, avg):
     search_results = books.search_for_books_by_name(name)
 
     return render_template('result.html', results = search_results)
-
-
 
 @app.route('/search')
 def search():

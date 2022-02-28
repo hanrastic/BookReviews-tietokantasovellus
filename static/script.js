@@ -19,7 +19,7 @@ function checkForEmptyFields(form){
 
 function checkForEmptyCategories() {
     
-    var categories = document.getElementById('categories').children;  
+    var categories = document.getElementById('categories').getElementById('div4').getElementById('div').children;
 
     for (var i = 0; i < categories.length; i++) {
         if (categories[i].tagName == 'INPUT' && categories[i].type == 'checkbox') {

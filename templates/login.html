@@ -2,14 +2,14 @@
 
 {% block content %}
 <h1>Log in!</h1>
-<form action='/login' method='POST'>
-    <label for="username">Username:</label>
-    <input type='text' name='username' id='username' required autofocus>
-    <br>
-    <label for="password">Password:</label>
-    <input type="password" name='password' id='password' required>
-    <br>
-    <input type="submit" value='Log in' class='button'>
-</form>
-    <a href="/signup" class='button'>Sign up instead</a>
+<section class="container">
+    <form action='/login' method='POST'>
+            <input type='text' name='username' id='text-input' placeholder="Username" required autofocus>
+            <br>
+            <input type="password" name='password' id='text-input' placeholder="Username" required>
+            <br>
+            <input type="submit" value='Log in' id="login">
+    </form>
+</section>
+    <a href="/signup" class='container' id="hover">Sign up instead</a>
 {% endblock %}

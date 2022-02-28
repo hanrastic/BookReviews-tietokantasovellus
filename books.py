@@ -84,8 +84,16 @@ def convert(list):
 
 def get_top_5_reviewed_books():
     sql =   ("SELECT "
-            "books.name, ROUND(AVG(ratings.book_rating), 2) AS avg "
+            "books.name, ROUND(AVG(ratings.book_rating), 2) AS avg, COUNT(ratings.book_rating) AS cnt "
             "FROM books INNER JOIN ratings ON books.id = ratings.book_id "
             "GROUP BY books.name "
             "ORDER BY 2 DESC LIMIT 5")
     return db.session.execute(sql).fetchall()
+
+def like_a_review():
+    sql =   ("""
+
+            
+
+            """)
+    pass

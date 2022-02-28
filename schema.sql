@@ -39,10 +39,3 @@ CREATE TABLE IF NOT EXISTS reviews (
     rev_comment TEXT
 );
 
--- CREATE TABLE readingList(
---     id SERIAL PRIMARY KEY,
---     user_id INTEGER REFERENCES users,
---     book_name INTEGER REFERENCES books
---     read_status BOOLEAN
--- );
-

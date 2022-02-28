@@ -3,15 +3,14 @@
 {% block content %}
 
 <h1>Create user!</h1>
-
-<form action="/signup" method="POST">
-    <label for="username">Username:</label>
-    <input type='text' name='username' id='username' required autofocus>
-    <br>
-    <label for="password">Password:</label>
-    <input type='password' name='password' id='password' required>
-    <br>
-    <input type='submit' value='Confirm' class='button'>
-    <script src="static/script.js"></script>
-</form>    
+<section class="container">
+    <form action="/signup" method="POST">
+        <input type='text' name='username' id='text-input' placeholder="Username" required autofocus>
+        <br>
+        <input type='password' name='password' id='text-input' placeholder="Password" required>
+        <br>
+        <input type='submit' value='Confirm' id="login">
+        <script src="static/script.js"></script>
+    </form>  
+</section>  
 {% endblock %}
