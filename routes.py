@@ -5,8 +5,9 @@ import books
 
 @app.route("/")
 def index():
-    top_5_books = books.get_top_5_reviewed_books()
-    return render_template("index.html", books = top_5_books)
+    top_5_books = books.get_top_5_best_reviewed_books()
+    most_reviewed_books = books.get_top_5_most_reviewed_books()
+    return render_template("index.html", books = top_5_books, books2 = most_reviewed_books)
 
 @app.route("/signup", methods=["GET","POST"])
 def signup():

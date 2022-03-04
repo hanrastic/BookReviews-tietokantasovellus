@@ -13,7 +13,6 @@
         <label for="book_name">Book name:</label>
         <input type="text" name="book_name" id="text-input" placeholder="Name of the book">
         <br>
-        <br>
         <label for="category">Categories (choose many):</label>
         {% include 'categories.html'%}
         <br>
@@ -33,9 +32,9 @@
         <br>
         <label for='review-text'>Write a review (optional):</label>
         <br>
-        <textarea name='review-text' id='review-text' cols='50' rows='12'></textarea>
+        <textarea name='review-text' class="text-area" id='review-text' cols='50' rows='12'></textarea>
         <br>
-        <input type="submit" value="Submit review" class="Button">
+        <input type="submit" value="Submit review" id="login">
         <input type='hidden' name='csrf_token' value= {{ session.csrf_token }}>
     </form>
 </section>

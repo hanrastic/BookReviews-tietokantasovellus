@@ -16,25 +16,48 @@
         {% endif %}
     </section class= 'container'>
     <hr>
-    <section class='container'>
+    <section class='container' id="inline">
+        <div>
         <h2>Top-5 best reviewed books</h2>
-        <ul>
-            {% if books %}
-            {% for book in books %}
-                <section class="container" >
-                    <ul>
-                        <p class="button">
-                            <strong>Book: </strong> <a href="/result/{{ book.name }}/{{ book.avg }}" class="book" id="hover" name="query_by_book_name">{{ book.name }} </a><strong>stars: </strong> {{ book.avg }}
-                            <strong>Reviews: </strong> {{ book.cnt }}
-                        </p>
+            <ul>
+                {% if books %}
+                {% for book in books %}
+                    <section class="container" >
+                        <ul>
+                            <p class="button">
+                                <strong>Book: </strong> <a href="/result/{{ book.name }}/{{ book.avg }}" class="book" id="hover" name="query_by_book_name">{{ book.name }} </a><strong>stars: </strong> {{ book.avg }}
+                                <strong>Reviews: </strong> {{ book.cnt }}
+                            </p>
 
-                    </ul>
-                </section>
-            {% endfor %}
-            {% else %}
-                <p>No reviews yet</p>
-            {% endif %}
-        </ul>
+                        </ul>
+                    </section>
+                {% endfor %}
+                {% else %}
+                    <p>No reviews yet</p>
+                {% endif %}
+            </ul>
+        </div>
+        <!-- NOT READY YET 
+            <div>
+            <h2>Most reviewed books</h2>
+            <ul>
+                {% if books2 %}
+                {% for book in books2 %}
+                    <section class="container" >
+                        <ul>
+                            <p class="button">
+                                <strong>Book: </strong> <a href="/result/{{ book.name }}/{{ book.avg }}" class="book" id="hover" name="query_by_book_name">{{ book.name }} </a><strong>stars: </strong> {{ book.avg }}
+                                <strong>Reviews: </strong> {{ book.cnt }}
+                            </p>
+
+                        </ul>
+                    </section>
+                {% endfor %}
+                {% else %}
+                    <p>No reviews yet</p>
+                {% endif %}
+            </ul>
+        </div> -->
     </section>    
 </body>
 {% endblock %}

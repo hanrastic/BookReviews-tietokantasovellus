@@ -41,6 +41,12 @@ a.container {
     font-size: 200%;
 }
 
+.text-area{
+    width: 100%;
+    border-radius: 5px;
+    font-size: 16px;
+}
+
 #right {
     position: absolute;
     right: 0px;
@@ -184,6 +190,10 @@ header {
 
 form {
     align-items: center;
+}
+
+div{
+    display: inline;
 }
 
 @media screen and (max-width: 768px) {
